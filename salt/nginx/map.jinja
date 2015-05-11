@@ -14,21 +14,6 @@
         'sbin_dir': '/usr/sbin',
         'install_prefix': '/usr/local/nginx',
         'make_flags': '-j2'
-    },
-    'RedHat': {
-        'apache_utils': 'httpd-tools',
-        'package': 'nginx',
-        'default_user': 'nginx',
-        'default_group': 'nginx',
-        'disable_before_rename': True,
-        'old_init_disable': 'chkconfig --del nginx',
-        'use_upstart': True,
-        'use_sysvinit': False,
-        'home': '/var/www',
-        'conf_dir': '/etc/nginx',
-        'log_dir': '/var/log/nginx',
-        'sbin_dir': '/usr/sbin',
-        'install_prefix': '/usr/local/nginx',
-        'make_flags': '-j2'
-    },
-}, merge=salt['pillar.get']('nginx:lookup'), default='Debian') %}
+    }
+}, merge=salt['pillar.get']('nginx:lookup')) %}
+

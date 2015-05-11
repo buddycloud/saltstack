@@ -8,6 +8,7 @@ base:
     - nginx
   abyss.buddycloud.com:
     - nginx
+    - ruby
     - discourse
 
 
