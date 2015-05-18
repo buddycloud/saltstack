@@ -1,0 +1,68 @@
+rails_env   = "{{ pillar['discourse']['env'] }}"
+rails_root  = "/var/www/discourse"
+
+user      = 'discourse'
+group     = 'discourse'
+num_webs  = ENV["NUM_WEBS"].to_i > 0 ? ENV["NUM_WEBS"].to_i : "{{ grains['num_cpus'] }}".to_i
+
+# Running bluepill as a user? Use:
+Bluepill.application("discourse", base_dir: ENV["HOME"] + '/.bluepill', foreground: true) do |app|
+  app.uid = user
+  app.gid = group
+  
+  app.environment ||= {}
+  app.environment['RAILS_ENV'] = rails_env
+
+  app.working_dir = rails_root
+  sockdir = "#{rails_root}/tmp/sockets"
+  File.directory? sockdir or FileUtils.mkdir_p sockdir
+  num_webs.times do |i|
+    app.process("thin-#{i}") do |process|
+      process.start_command  = "bundle exec thin start -e #{rails_env} -t 0 --socket #{sockdir}/thin.#{i}.sock --pid #{rails_root}/tmp/pids/thin#{i}.pid --log #{rails_root}/log/thin-#{i}.log --daemonize"
+
+      # Alternatively, you can start with a port number instead of a socket. If you do that, then you MUST update
+      # the upstream section in the nginx config to match.
+      # The nginx.sample.conf file assumes you're using sockets.
+      # process.start_command  = "bundle exec thin start -e production -t 0 -p #{9040 + i} -P #{rails_root}/tmp/pids/thin#{i}.pid -d"
+
+      process.pid_file = "#{rails_root}/tmp/pids/thin#{i}.pid"
+      process.start_grace_time = 30.seconds
+      process.stop_grace_time = 10.seconds
+      process.restart_grace_time = 10.seconds
+      process.group = "thins"
+      process.uid = user
+      process.gid = group
+      process.daemonize = false
+      process.stdout = process.stderr = "#{rails_root}/log/thin#{i}.log"
+    end
+  end
+
+#debug instance
+#    app.process("thin-debug") do |process|
+#      process.start_command  = "bundle exec thin start -e development -t 0 -p 10040 -P #{rails_root}/tmp/pids/thin-debug.pid -l #{rails_root}/log/thin-debug.log" -d"
+#      process.pid_file = "#{rails_root}/tmp/pids/thin-debug.pid"
+#      process.start_grace_time = 30.seconds
+#      process.stop_grace_time = 10.seconds
+#      process.restart_grace_time = 10.seconds
+#      process.group = "thins"
+#      process.uid = user
+#      process.gid = group
+#      process.daemonize = false
+#      process.stdout = process.stderr = "#{rails_root}/log/thin-debug.log"
+#    end
+
+  app.process("sidekiq-worker") do |process|
+    pidfile = "#{rails_root}/tmp/pids/sidekiq-worker.pid"
+
+    process.start_command  = "/usr/bin/env PIDFILE=#{pidfile} RAILS_ENV=#{rails_env} bundle exec sidekiq -L #{rails_root}/log/sidekiq.log"
+    process.pid_file = pidfile
+    process.start_grace_time = 30.seconds
+    process.stop_grace_time = 10.seconds
+    process.restart_grace_time = 10.seconds
+    process.uid = user
+    process.gid = group
+    process.daemonize = true
+  end
+
+end
+

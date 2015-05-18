@@ -1,0 +1,15 @@
+{{ pillar['discourse']['env'] }}:
+  adapter: postgresql
+  database: discourse_{{ pillar['discourse']['env'] }}
+  # username: discourse_prod  # if using username/password auth
+  # password: itisagooddaytovi  # if using username/password auth
+  # host: dbhost    # if not localhost
+  pool: 5   # size of DB connection pool *per process*
+  timeout: 5000
+  # db_id: 0  # database ID if hosting multiple sites
+  host_names:
+    ### If you change this setting you will need to
+    ###   - restart sidekiq if you change this setting
+    ###   - rebake all to posts using: `RAILS_ENV=production bundle exec rake posts:rebake`
+    - {{ pillar['discourse']['domain'] }}
+

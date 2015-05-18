@@ -2,6 +2,7 @@
 {% set ruby_version = pillar['discourse']['ruby-version'] %}
 
 include:
+  - .database
   - .nginx
   - .redis
   - .ruby
@@ -169,22 +170,3 @@ app-assets-setup:
 discourse-bluepill:
   service.running
 
-discourse-db-user:
-  postgres_user.present:
-    - name: discourse
-    - runas: postgres # The migration that enable the hstore extension doesn't work otherwise
-    - superuser: True
-    - require:
-      - service: postgresql
-
-discourse-db:
-  postgres_database.present:
-    - name: discourse_{{ pillar['discourse']['env'] }}
-    - encoding: UTF8
-    - lc_ctype: en_US.UTF8
-    - lc_collate: en_US.UTF8
-    - template: template0
-    - owner: discourse
-    - runas: postgres
-    - require:
-      - postgres_user: discourse-db-user
