@@ -1,7 +1,7 @@
 base:
   '*':
     - sanity
-    - ntp
+    - time
     - sssd
     - groups
     - users
