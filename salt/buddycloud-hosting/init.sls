@@ -18,14 +18,12 @@ create-hosting-account:
     - group: root
     - mode: 644
 
-
-
 # install the hosting package
-ADD hosting.deb /tmp/hosting.deb
-RUN DEBIAN_FRONTEND=noninteractive dpkg -i /tmp/hosting.deb
-ADD buddycloud-hosting.cfg /usr/share/buddycloud-hosting/hosting.cfg
-ADD logging.cfg /usr/share/buddycloud-hosting/logging.cfg
+#ADD hosting.deb /tmp/hosting.deb
+#RUN DEBIAN_FRONTEND=noninteractive dpkg -i /tmp/hosting.deb
+#ADD buddycloud-hosting.cfg /usr/share/buddycloud-hosting/hosting.cfg
+#ADD logging.cfg /usr/share/buddycloud-hosting/logging.cfg
 
-ENTRYPOINT ln -s /srv/secret/logstash-forwarder.crt /opt/logstash-forwarder/logstash-forwarder.crt; ln -s /srv/secret/logstash-forwarder.key /opt/logstash-forwarder/logstash-forwarder.key; /opt/logstash-forwarder/bin/logstash-forwarder -config /tmp/logstash.conf & cd /usr/share/buddycloud-hosting; python run.py
-EXPOSE 3000
+#ENTRYPOINT ln -s /srv/secret/logstash-forwarder.crt /opt/logstash-forwarder/logstash-forwarder.crt; ln -s /srv/secret/logstash-forwarder.key /opt/logstash-forwarder/logstash-forwarder.key; /opt/logstash-forwarder/bin/logstash-forwarder -config /tmp/logstash.conf & cd /usr/share/buddycloud-hosting; python run.py
+#EXPOSE 3000
 

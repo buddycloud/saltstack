@@ -5,7 +5,7 @@ foundation:
       - vim
       - tmux
       - htop
-      - tree
+      - psmisc
       - htop
       - git
       - zsh

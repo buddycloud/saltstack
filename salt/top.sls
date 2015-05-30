@@ -13,13 +13,14 @@ base:
     - tigase-server
     - buddycloud-server-java
     - buddycloud-media-server
-    - buddycloud-hosting
     - buddycloud-pusher
     - buddycloud-http-api
+    - buddycloud-hosting
   abyss.buddycloud.com:
     - postgres
     - nginx
     - ruby
+    - mumble-server
     - discourse
 
 

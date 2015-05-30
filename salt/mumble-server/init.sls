@@ -23,7 +23,7 @@ mumbleserver:
     - user: mumble-server
     - group: root
     - mode: 600
-    - contents_pillar: salt://ssl:buddycloud.com:cert
+    - contents_pillar: ssl:buddycloud.com:cert
 
 /etc/mumble/buddycloud.com.key.pem:
   file.managed:
@@ -31,7 +31,7 @@ mumbleserver:
     - user: mumble-server
     - group: root
     - mode: 600
-    - contents_pillar: salt://ssl:buddycloud.com:key
+    - contents_pillar: ssl:buddycloud.com:key
 
 /etc/mumble/buddycloud.com.ca.pem:
   file.managed:
@@ -39,7 +39,7 @@ mumbleserver:
     - user: mumble-server
     - group: root
     - mode: 600
-    - contents_pillar: salt://ssl:buddycloud.com:ca
+    - contents_pillar: ssl:buddycloud.com:ca
 
 mumbleserver-tcp:
   iptables.append:
