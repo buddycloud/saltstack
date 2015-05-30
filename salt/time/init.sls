@@ -12,11 +12,9 @@ ntpdate:
     - installed
     - require:
       - pkg: ntp-pkgs
-  service:
-    - enabled
 
 # NTP Service
-ntpd:
+ntp:
   service.running:
     - enable: True
     - watch:
@@ -30,6 +28,12 @@ ntpd:
     - group: root
     - mode: '0440'
     - template: jinja
-    - source: salt://ntp/ntp.conf.jinja
+    - source: salt://time/ntp.conf.jinja
     - require:
       - pkg: ntp-pkgs
+
+# run all buddycloud servers in UTC
+Etc/UTC:
+  timezone.system:
+    - utc: True
+
