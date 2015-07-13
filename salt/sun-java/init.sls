@@ -12,4 +12,3 @@ oracle-java7-installer:
         'shared/accepted-oracle-license-v1-1': {'type': 'boolean', 'value': True}
     - require_in:
       - pkg: oracle-java7-installer
-

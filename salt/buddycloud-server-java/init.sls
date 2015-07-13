@@ -15,9 +15,9 @@ buddycloud-server-java:
 
 create-buddycloud-server-schema:
   cmd.run:
-    - name: psql -h 127.0.0.1 -U buddycloud_server_java buddycloud_server_java -f /usr/share/dbconfig-common/data/buddycloud-server-java/install/pgsql
+    - name: psql -h {{ salt['pillar.get']('buddycloud:lookup:database-server') }} -U {{ salt['pillar.get']('buddycloud:lookup:env') }}_buddycloudserver {{ salt['pillar.get']('buddycloud:lookup:env') }}_buddycloudserver -f /usr/share/dbconfig-common/data/buddycloud-server-java/install/pgsql
     - env:
-      - PGPASSWORD: '{{ salt['pillar.get']('postgres:users:buddycloud_server_java:password') }}'
+      - PGPASSWORD: '{{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:buddycloudserver:password') }}'
 
 /etc/dbconfig-common/buddycloud-server-java.conf:
   file.managed:
@@ -61,7 +61,6 @@ remove-broken-init-file:
     - reload: True
     - full_restart: True
     - require:
-      - pkg: postgresql-9.3
       - pkg: buddycloud-server-java
       - pkg: buddycloud-server-java-dependencies
       - file: /usr/share/buddycloud-server-java/configuration.properties

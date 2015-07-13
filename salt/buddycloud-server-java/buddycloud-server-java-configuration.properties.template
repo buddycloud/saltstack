@@ -7,10 +7,10 @@ server.domain.channels=channels.{{ salt['pillar.get']('buddycloud:lookup:domain'
 server.domain.topics=topics.{{ salt['pillar.get']('buddycloud:lookup:domain') }}
 
 jdbc.proxool.alias=buddycloud_server_java
-jdbc.proxool.driver-url=jdbc:postgresql://127.0.0.1:5432/buddycloud_server_java
+jdbc.proxool.driver-url=jdbc:postgresql://{{ salt['pillar.get']('buddycloud:lookup:database-server') }}:5432/buddycloud_server_java
 jdbc.proxool.driver-class=org.postgresql.Driver
 jdbc.user=buddycloud_server_java
-jdbc.password={{ salt['pillar.get']('postgres:users:buddycloud_server_java:password') }}
+jdbc.password={{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:buddycloudserver:password') }}
 jdbc.proxool.maximum-connection-count=10
 jdbc.proxool.house-keeping-test-sql=select CURRENT_DATE
 

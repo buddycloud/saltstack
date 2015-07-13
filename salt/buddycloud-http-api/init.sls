@@ -38,6 +38,9 @@ buddycloud-http-api-install:
   cmd.run:
     - name: npm i --development .
     - cwd: /opt/buddycloud-http-api
+    - runas: nobody
+    - env: 
+      - HOME: /opt/buddycloud-http-api
     - require:
        - git: buddycloud-http-api-git-checkout
 
