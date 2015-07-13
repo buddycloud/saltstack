@@ -27,6 +27,14 @@ certificates:
     - mode: 640
     - contents_pillar: ssl:{{domain_name}}:key
 
+/etc/certificates/{{domain_name}}.intermediate.pem:
+  file.managed:
+    - makedirs: True
+    - user: root
+    - group: certificates
+    - mode: 640
+    - contents_pillar: ssl:{{domain_name}}:intermediate
+
 /etc/certificates/{{domain_name}}.ca.pem:
   file.managed:
     - makedirs: True
@@ -35,20 +43,14 @@ certificates:
     - mode: 640
     - contents_pillar: ssl:{{domain_name}}:ca
 
-/etc/certificates/{{domain_name}}.pem:
-  file.managed:
-    - makedirs: True
-    - user: root
-    - group: certificates
-    - mode: 640
-    - contents_pillar: ssl:{{domain_name}}:pem
-{% endfor %}
-
-/etc/certificates/test.pem:
+/etc/certificates/{{domain_name}}.complete.pem:
   file.managed:
     - makedirs: True
     - user: root
     - group: certificates
     - mode: 640
     - template: jinja
-    - source: salt://certificates/pem-template.jinja
+    - source: salt://certificates/complete-pem-template.jinja
+    - context:
+      domain_name: {{ domain_name }}
+{% endfor %}
