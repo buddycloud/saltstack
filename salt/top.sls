@@ -6,6 +6,7 @@ base:
     - groups
     - users
     - sudoers
+    - certificates
   si.buddycloud.com:
     - node 
     - nginx
@@ -14,8 +15,9 @@ base:
     - buddycloud-server-java
     - buddycloud-media-server
     - buddycloud-pusher
-    - buddycloud-http-api
     - buddycloud-hosting
+    - buddycloud-http-api
+    - buddycloud-webapps
   abyss.buddycloud.com:
     - postgres
     - nginx

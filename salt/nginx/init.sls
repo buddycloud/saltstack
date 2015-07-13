@@ -44,11 +44,6 @@
     - group: root
 {% endfor -%}
 
-nginx_service:
-  service.running:
-    - enable: True
-    - name: nginx
-
 distro_nginx_package:
   pkg.installed:
     - name: nginx
@@ -67,3 +62,42 @@ nginx_config:
     - mode: 644
     - watch_in:
       - service: nginx_service
+
+/etc/nginx/sites-enabled/default:
+  file.absent:
+    - name: /etc/nginx/sites-enabled/default
+    - require:
+      - pkg: nginx
+
+nginx_service:
+  service.running:
+    - name: nginx
+    - reload: True
+    - enable: True
+    - watch:
+      - file: /etc/nginx/sites-enabled/*
+    - require:
+      - pkg: nginx
+
+nginx-firewall-80:
+  iptables.append:
+    - table: filter
+    - chain: INPUT
+    - jump: ACCEPT
+    - match: state
+    - connstate: NEW
+    - dport: 80
+    - proto: tcp
+    - save: True
+
+nginx-firewall-443:
+  iptables.append:
+    - table: filter
+    - chain: INPUT
+    - jump: ACCEPT
+    - match: state
+    - connstate: NEW
+    - dport: 443
+    - proto: tcp
+    - save: True
+

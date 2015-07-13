@@ -5,7 +5,7 @@ xmpp.subdomain=pusher.{{ salt['pillar.get']('buddycloud:lookup:domain') }}
 xmpp.secretkey={ salt['pillar.get']('buddycloud:lookup:pusher-xmpp-componet-password') }}
 
 # JDBC
-jdbc.url=jdbc:postgresql://127.0.0.1:5432/buddycloud_pusher?user=buddycloud_pusher&password={{ salt['pillar.get']('postgres:users:buddycloud_pusher:password') }}
+jdbc.url=jdbc:postgresql://{{ salt['pillar.get']('buddycloud:lookup:database-server') }}:5432/buddycloud_pusher?user=buddycloud_pusher&password={{ salt['pillar.get']('postgres:users:buddycloud_pusher:password') }}
 
 # channel server jid
 channel.server=channels.{{ salt['pillar.get']('buddycloud:lookup:domain') }}

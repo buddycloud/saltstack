@@ -1,9 +1,9 @@
---admins = admin@{{ salt['pillar.get']('buddycloud:lookup:domain') }}
+--admins = hosting-admin@{{ salt['pillar.get']('buddycloud:lookup:domain') }}
 --user-db=pgsql
---user-db-uri=jdbc:postgresql://127.0.0.1/tigase_server?user={{ salt['pillar.get']('postgres:users:buddycloud_media_server:password') }}&useUnicode=true&characterEncoding=UTF-8&autoCreateUser=true
+--user-db-uri=jdbc:postgresql://{{ salt['pillar.get']('buddycloud:lookup:database-server') }}/{{ salt['pillar.get']('buddycloud:lookup:env') }}_tigase?user={{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:tigase:user') }}&password={{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:tigase:password') }}&useUnicode=true&characterEncoding=UTF-8&autoCreateUser=true
 config-type = --gen-config-all
-basic-conf/virt-hosts-cert-*=/srv/secret/buddycloud.pem
-basic-conf/virt-hosts-cert-buddycloud.net=/srv/secret/buddycloud.pem
+basic-conf/virt-hosts-cert-*=/etc/certificates/{{ salt['pillar.get']('buddycloud:lookup:domain') }}.pem
+basic-conf/virt-hosts-cert-{{ salt['pillar.get']('buddycloud:lookup:domain') }}=/etc/certificates/{{ salt['pillar.get']('buddycloud:lookup:domain') }}.pem
 --vhost-tls-required = true
 --hardened-mode = true
 basic-conf/auth-repo-params/sasl-mechs=PLAIN,ANONYMOUS,EXTERNAL

@@ -46,10 +46,11 @@ install-tigase-server:
 
 create-tigase-db-schema:
   cmd.run:
-    - name: psql -h  127.0.0.1 -U tigase_server tigase_server -f database/postgresql-schema-5-1.sql
+    - name: psql -h  {{ salt['pillar.get']('buddycloud:lookup:database-server') }} -U {{ salt['pillar.get']('buddycloud:lookup:env') }}_tigase {{ salt['pillar.get']('buddycloud:lookup:env') }}_tigase -f database/postgresql-schema-5-1.sql
     - cwd: /opt/tigase-server
     - env:
-      - PGPASSWORD: '{{ salt['pillar.get']('postgres:users:tigase_server:password') }}'
+      - PGPASSWORD: '{{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:tigase:password') }}'
+
 
 tigase-firewall-c2s:
   iptables.append:
@@ -85,7 +86,6 @@ tigase-firewall-s2s:
     - reload: True
     - init_delay: 5
     - require:
-      - pkg: postgresql-9.3
       - pkg: oracle-java7-installer
       - file: /etc/default/tigase
       - file: /opt/tigase-server/etc/tigase.conf

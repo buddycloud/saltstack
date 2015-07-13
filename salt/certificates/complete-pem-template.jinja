@@ -1,0 +1,1 @@
+{% set keyname = 'ssl:' + domain_name + ':key' %}{% set certname = 'ssl:' + domain_name + ':cert' %}{% set intermediatename = 'ssl:' + domain_name + ':intermediate' %}{% set caname = 'ssl:' + domain_name + ':ca' %}{{ salt['pillar.get'](keyname) }}{{ salt['pillar.get'](certname) }}{{ salt['pillar.get'](intermediatename) }}{{ salt['pillar.get'](caname) }}
