@@ -12,13 +12,11 @@ respawn limit 10 5
 start on runlevel [2345]
 stop on runlevel [!2345]
 
-setuid root
-setgid root
+setuid nobody
+setgid nogroup
 
 script
-   touch /var/log/buddycloud/buddycloud-http-api.log
-   chown nobody:nogroup /var/log/buddycloud/buddycloud-http-api.log
    cd /opt/buddycloud-http-api
-   exec /usr/bin/node /opt/buddycloud-http-api/server.js >> /var/log/buddycloud/buddycloud-http-api.log 2>&1
+   exec /usr/bin/node /opt/buddycloud-http-api/server.js >> /var/log/buddycloud-http-api.log 2>&1
 end script
 

@@ -18,6 +18,8 @@ base:
     - buddycloud-hosting
     - buddycloud-http-api
     - buddycloud-webapps
+  prod.buddycloud.com:
+    - buddycloud-http-api
   abyss.buddycloud.com:
     - postgres
     - nginx
