@@ -14,7 +14,7 @@ install-buddyclould-http-api-dependencies:
 buddycloud-http-api-git-checkout:
   git.latest:
     - name: https://github.com/buddycloud/buddycloud-http-api.git
-    - rev: develop
+    - rev: {{ salt['pillar.get']('buddycloud:lookup:git-branch') }}
     - target: /opt/buddycloud-http-api
     - force_reset: true
     - force: true
@@ -28,7 +28,7 @@ buddycloud-http-api-git-checkout:
       - user
       - group
 
-/var/log/buddycloud/buddycloud-http-api.log:
+/var/log/buddycloud-http-api.log:
   file.managed:
     - user: nobody
     - group: nogroup
@@ -42,7 +42,7 @@ buddycloud-http-api-install:
     - env: 
       - HOME: /opt/buddycloud-http-api
     - require:
-       - git: buddycloud-http-api-git-checkout
+      - pkg: install-buddyclould-http-api-dependencies
 
 /opt/buddycloud-http-api/config.js:
   file.managed:
@@ -61,13 +61,23 @@ buddycloud-http-api-install:
     - user: root
     - group: root
     - mode: 0755
+
+buddycloud-http-api:
   service.running:
     - name: buddycloud-http-api
     - enable: True
     - force_reload: True
     - full_restart: True
+    - require:
+      - cmd: buddycloud-http-api-install
+      - file: /etc/init/buddycloud-http-api.conf
+      - file: /etc/logrotate.d/buddycloud-http-api
+      - file: /etc/init/buddycloud-http-api.conf
+      - file: /var/log/buddycloud-http-api.log
+      - pkg: install-buddyclould-http-api-dependencies
     - watch:
       - file: /opt/buddycloud-http-api/*
+      - file: /etc/init/buddycloud-http-api.conf
 
 xmpp-ftw-firewall:
   iptables.append:
