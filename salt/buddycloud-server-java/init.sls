@@ -42,12 +42,11 @@ create-buddycloud-server-schema:
     - group: root
     - mode: 0644
 
-remove-broken-init-file:
-  cmd.run: 
-    - name: rm /etc/init.d/buddycloud-server-java | true
-
-/var/log/buddycloud-server-java:
-  file.absent
+remove-uneeded-files:
+  file.absent:
+    - names:
+      - /var/log/buddycloud-server-java
+      - /etc/init.d/buddycloud-server-java
 
 /etc/init/buddycloud-server-java.conf:
   file.managed:
