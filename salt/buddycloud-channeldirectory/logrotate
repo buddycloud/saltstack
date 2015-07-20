@@ -1,0 +1,26 @@
+/var/log/buddycloud-channeldirectory.log {
+  copytruncate
+  daily
+  rotate 10
+  compress
+  missingok
+  create 640 nobody nogroup
+}
+
+/var/log/buddycloud-crawler.log {
+  copytruncate
+  daily
+  rotate 10
+  compress
+  missingok
+  create 640 nobody nogroup
+}
+
+/var/log/buddycloud-solr.log {
+  copytruncate
+  daily
+  rotate 10
+  compress
+  missingok
+  create 640 nobody nogroup
+}
