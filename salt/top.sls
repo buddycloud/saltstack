@@ -21,10 +21,13 @@ base:
   prod.buddycloud.com:
     - buddycloud-http-api
   abyss.buddycloud.com:
+    - node
     - postgres
     - nginx
     - ruby
     - mumble-server
-    - discourse
-
+    # - discourse
+    - buddycloud-downloads
+    - buddycloud-http-api
+    - buddycloud-angular-app
 
