@@ -19,7 +19,7 @@ buddycloud-angular-app-npm-packages:
 
 buddycloud-angular-app-git-checkout:
   git.latest:
-    - name: https://github.com/robotnic/angular-xmpp.git
+    - name: https://github.com/buddycloud/buddycloud-angular-app.git
     - rev: master
     - target: /opt/buddycloud-angular-app
     - force_reset: true
@@ -39,16 +39,6 @@ buddycloud-angular-app-git-checkout:
     - user: nobody
     - group: nogroup
     - mode: 644
-
-buddycloud-angular-app-bower-install:
-  cmd.run:
-    - name: bower --allow-root install angular-xmpp
-    - cwd: /opt/buddycloud-angular-app
-    - runas: nobody
-    - env: 
-      - HOME: /opt/buddycloud-angular-app
-    - require:
-      - pkg: buddyclould-angular-app-dependencies
 
 /etc/nginx/sites-enabled/buddycloud.org.conf:
   file.managed:
