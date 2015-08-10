@@ -10,6 +10,14 @@ certificates:
     - mode: 755
     - makedirs: True
 
+/etc/certificates/dh4096.pem:
+  file.managed:
+    - makedirs: True
+    - user: root
+    - group: certificates
+    - mode: 640
+    - contents_pillar: dh:param
+
 {% for domain_name in ['buddycloud.com','buddycloud.net','buddycloud.org'] %}
 /etc/certificates/{{domain_name}}.cert.pem:
   file.managed:
