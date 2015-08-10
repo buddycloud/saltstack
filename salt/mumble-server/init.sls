@@ -17,29 +17,11 @@ mumbleserver:
     - require:
       - pkg: mumble-server
 
-/etc/mumble/buddycloud.com.cert.pem:
-  file.managed:
-    - makedirs: True
-    - user: mumble-server
-    - group: root
-    - mode: 600
-    - contents_pillar: ssl:buddycloud.com:cert
-
-/etc/mumble/buddycloud.com.key.pem:
-  file.managed:
-    - makedirs: True
-    - user: mumble-server
-    - group: root
-    - mode: 600
-    - contents_pillar: ssl:buddycloud.com:key
-
-/etc/mumble/buddycloud.com.ca.pem:
-  file.managed:
-    - makedirs: True
-    - user: mumble-server
-    - group: root
-    - mode: 600
-    - contents_pillar: ssl:buddycloud.com:ca
+mumble-read-certificates:
+  user.present:
+    - name: mumble-server
+    - groups:
+      - certificates
 
 mumbleserver-tcp:
   iptables.append:
