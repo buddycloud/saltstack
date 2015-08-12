@@ -30,4 +30,6 @@ base:
     - buddycloud-downloads
     - buddycloud-http-api
     - buddycloud-angular-app
+  crater.buddycloud.com:
+    - buddycloud-ddns
 
