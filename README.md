@@ -6,6 +6,7 @@ Runs on abyss.buddycloud.com
 ## Design choices
 
 - install services into `/opt/buddycloud-<servicename>`
+- all services run as nobody:nogroup (except nginx)
 - Log everything to `/var/log/buddycloud/<service-name>.log` (makes it nice to do a `tail -F /var/log/buddycloud/*log`)
 - logrotate everything
 - use `buddycloud.dev` for default domain
