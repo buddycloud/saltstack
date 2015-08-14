@@ -18,11 +18,11 @@ Runs on abyss.buddycloud.com
 - clean up pillar environment to something like: `buddycloud:<env>:setting` 
 ```
 buddycloud:
-  general:
+  "*":
     ntp-server: 1.2.3.4
     dns-server: 1.2.3.4
   dev:
-    dns-server: 2.3.4.5 # should override "general" settings.
+    dns-server: 2.3.4.5 # should override "*" settings.
     frontend-url: http://localhost:3000
     send-address: noreply@somewhere.example
     smtp-server: abyss.buddycloud.com
