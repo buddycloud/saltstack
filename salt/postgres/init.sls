@@ -77,6 +77,7 @@ postgres-user-{{ name }}:
     - name: {{ name }}
     - createdb: {{ salt['pillar.get']('postgres:users:' + name + ':createdb', False) }}
     - password: {{ salt['pillar.get']('postgres:users:' + name + ':password', 'changethis') }}
+    - connlimit: {{ salt['pillar.get']('postgres:users:' + name + ':connlimit', '10') }}
     - runas: postgres
     - require:
       - service: {{ postgres.service }}
