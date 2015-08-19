@@ -25,11 +25,17 @@ base:
     - postgres
     - nginx
     - ruby
+    - discourse
     - mumble-server
-    # - discourse
     - buddycloud-downloads
-    - buddycloud-http-api
-    - buddycloud-angular-app
   crater.buddycloud.com:
+    - node
+    - nginx
+    - jenkins
+    - prosody
+    - buddycloud-http-api
     - buddycloud-ddns
-
+    - buddycloud-server-java
+    - buddycloud-media-server
+    - buddycloud-angular-app
+    - buddycloud-webclient
