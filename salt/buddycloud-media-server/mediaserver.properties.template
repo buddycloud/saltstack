@@ -15,7 +15,7 @@ https.key.password=password
 xmpp.component.host=127.0.0.1
 xmpp.component.port=5347
 xmpp.component.subdomain=media.{{ salt['pillar.get']('buddycloud:lookup:domain') }}
-xmpp.component.secretkey={{ salt['pillar.get']('buddycloud:lookup:media-xmpp-componet-password') }}
+xmpp.component.secretkey={{ salt['pillar.get']('buddycloud:lookup:xmpp-componet-secret') }}
 
 xmpp.connection.username=mediaserver-test
 xmpp.connection.password={{ salt['pillar.get']('buddycloud:lookup:media-jid-password') }}

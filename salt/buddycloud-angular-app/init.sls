@@ -40,7 +40,7 @@ buddycloud-angular-app-git-checkout:
     - group: nogroup
     - mode: 644
 
-/etc/nginx/sites-enabled/buddycloud.org.conf:
+/etc/nginx/sites-enabled/buddycloud-angular-app.vhost.conf:
   file.managed:
     - source: salt://buddycloud-angular-app/nginx-vhost.conf.jinja
     - template: jinja

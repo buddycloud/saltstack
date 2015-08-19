@@ -50,6 +50,15 @@ create-buddycloud-media-server-schema:
 /var/log/buddycloud-media-server:
   file.absent
 
+
+/etc/nginx/sites-enabled/buddycloud-media-server.vhost.conf:
+  file.managed:
+    - source: salt://buddycloud-media-server/nginx-vhost.conf.jinja
+    - template: jinja
+    - user: root
+    - group: root
+    - mode: 644
+
 /etc/init.d/buddycloud-media-server:
   file.managed:
     - source: salt://buddycloud-media-server/buddycloud-media-server.init.d
