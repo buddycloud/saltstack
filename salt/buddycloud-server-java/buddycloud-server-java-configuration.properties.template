@@ -16,8 +16,8 @@ jdbc.proxool.house-keeping-test-sql=select CURRENT_DATE
 
 # Admin users are sent all notiifcations as well as having access 
 # to all posts from the /firehose node (not just from open channels)
-# users.admin = user1@example.com;crawler@searchengine.org
-user.admin = admin@{{ salt['pillar.get']('buddycloud:lookup:domain') }}
+# users.admin = pusher.example.com;archive-service@example.com;crawler@searchengine.org
+user.admin = pusher.{{ salt['pillar.get']('buddycloud:lookup:domain') }};buddycloud-crawler@buddycloud.org
 
 # A list of channels (local or remote) to which to subscribe new users
 # Note that the channels will not be created - they must already exist
