@@ -37,5 +37,5 @@ media.todisk.threshold=1048576
 media.storage.root=/srv/buddycloud-media-server-filestore
 media.sizelimit=1000240000
 
-http.endpoint={{ salt['pillar.get']('buddycloud:lookup:website') }}/api/media_proxy
+http.endpoint=https://media.{{ salt['pillar.get']('buddycloud:lookup:domain') }}:{{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }}/api/media_proxy
 
