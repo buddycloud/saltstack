@@ -5,7 +5,7 @@ server {
 }
 
 server {
-  listen                    443 ssl;
+  listen                    {{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }} ssl;
   server_name               demo.{{ salt['pillar.get']('buddycloud:lookup:domain') }};
   root                      /usr/share/buddycloud-webclient/;
   index                     index.html;

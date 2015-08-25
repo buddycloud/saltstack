@@ -6,7 +6,7 @@ server {
 }
 
 server {
-  listen                    443 ssl;
+  listen                    {{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }} ssl;
   server_name               {{ salt['pillar.get']('buddycloud:lookup:domain') }};
   root                      /opt/buddycloud-angular-app;
   index                     index.html;

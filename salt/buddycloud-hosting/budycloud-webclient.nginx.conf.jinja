@@ -22,7 +22,7 @@ map $host $forwarded_host {
 }
 
 server {
-    listen              443 ssl;
+    listen              {{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }} ssl;
     server_name         *.{{ salt['pillar.get']('buddycloud:lookup:domain') }};
     ssl_certificate     /etc/certificates/{{ salt['pillar.get']('buddycloud:lookup:domain') }}.cert.pem;
     ssl_certificate_key /etc/certificates/{{ salt['pillar.get']('buddycloud:lookup:domain') }}.key.pem;

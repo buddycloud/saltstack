@@ -34,7 +34,7 @@ dns-TXT-record-API:
     - name: _buddycloud-api._tcp
     - zone: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
     - ttl: 300
-    - data: '"v=1.0 host=demo.{{ salt['pillar.get']('buddycloud:lookup:domain') }} protocol=https path=/api port=443"'
+    - data: '"v=1.0 host=demo.{{ salt['pillar.get']('buddycloud:lookup:domain') }} protocol=https path=/api port={{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }}"'
     - nameserver: 5.9.91.110
     - keyfile: {{keyfile}}
     - keyname: buddycloud.net
