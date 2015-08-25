@@ -26,7 +26,7 @@ build-buddycloud-channeldirectory:
       - user
       - group
 
-/var/log/buddycloud-channeldirectory.log:
+/var/log/buddycloud/buddycloud-channeldirectory.log:
   file.managed:
     - user: nobody
     - group: nogroup
@@ -80,7 +80,7 @@ buddycloud-channeldirectory:
       - file: /etc/init/buddycloud-channeldirectory.conf
       - file: /etc/logrotate.d/buddycloud-channeldirectory
       - file: /etc/init/buddycloud-channeldirectory.conf
-      - file: /var/log/buddycloud-channeldirectory.log
+      - file: /var/log/buddycloud/buddycloud-channeldirectory.log
       - pkg: install-buddyclould-http-api-dependencies
     - watch:
       - file: /opt/buddycloud-channeldirectory/

@@ -1,4 +1,4 @@
-/var/log/buddycloud-channeldirectory.log {
+/var/log/buddycloud/buddycloud-channeldirectory.log {
   copytruncate
   daily
   rotate 10
@@ -7,7 +7,7 @@
   create 640 nobody nogroup
 }
 
-/var/log/buddycloud-crawler.log {
+/var/log/buddycloud/buddycloud-crawler.log {
   copytruncate
   daily
   rotate 10
@@ -16,7 +16,7 @@
   create 640 nobody nogroup
 }
 
-/var/log/buddycloud-solr.log {
+/var/log/buddycloud/buddycloud-solr.log {
   copytruncate
   daily
   rotate 10

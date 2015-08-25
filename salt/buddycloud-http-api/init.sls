@@ -28,7 +28,7 @@ buddycloud-http-api-git-checkout:
       - user
       - group
 
-/var/log/buddycloud-http-api.log:
+/var/log/buddycloud/buddycloud-http-api.log:
   file.managed:
     - user: nobody
     - group: nogroup
@@ -73,7 +73,7 @@ buddycloud-http-api:
       - file: /etc/init/buddycloud-http-api.conf
       - file: /etc/logrotate.d/buddycloud-http-api
       - file: /etc/init/buddycloud-http-api.conf
-      - file: /var/log/buddycloud-http-api.log
+      - file: /var/log/buddycloud/buddycloud-http-api.log
       - pkg: install-buddyclould-http-api-dependencies
     - watch:
       - file: /opt/buddycloud-http-api/*

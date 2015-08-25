@@ -12,7 +12,7 @@ exports.production = {
   homeMediaRoot: 'http://127.0.0.1:60080',
   createUserOnSessionCreation: true,
   logTransport: 'file',
-  logFile: '/var/log/buddycloud-http-api.log',
+  logFile: '/var/log/buddycloud/buddycloud-http-api.log',
   logLevel: 'debug',
   logUseJson: false
 };

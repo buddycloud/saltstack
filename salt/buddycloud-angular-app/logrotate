@@ -1,4 +1,4 @@
-/var/log/buddycloud-angular-app.log {
+/var/log/buddycloud/buddycloud-angular-app.log {
   copytruncate
   daily
   rotate 10

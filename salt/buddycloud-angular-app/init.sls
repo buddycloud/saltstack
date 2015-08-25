@@ -34,7 +34,7 @@ buddycloud-angular-app-git-checkout:
       - user
       - group
 
-/var/log/buddycloud-angular-app.log:
+/var/log/buddycloud/buddycloud-angular-app.log:
   file.managed:
     - user: nobody
     - group: nogroup
@@ -68,7 +68,7 @@ webhook-deployer:
     - force_reload: True
     - force_restart: True
 
-/var/log/buddycloud-angular-app-webhook-deployer.log:
+/var/log/buddycloud/buddycloud-angular-app-webhook-deployer.log:
   file.managed:
     - user: nobody
     - group: nogroup

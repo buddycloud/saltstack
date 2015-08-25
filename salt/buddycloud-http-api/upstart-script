@@ -17,6 +17,6 @@ setgid nogroup
 
 script
    cd /opt/buddycloud-http-api
-   exec /usr/bin/node /opt/buddycloud-http-api/server.js >> /var/log/buddycloud-http-api.log 2>&1
+   exec /usr/bin/node /opt/buddycloud-http-api/server.js >> /var/log/buddycloud/buddycloud-http-api.log 2>&1
 end script
 

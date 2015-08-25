@@ -10,7 +10,7 @@ setuid nobody
 setgid nogroup
 
 script
-  /usr/bin/webhook-deployer --configfile /opt/buddycloud-angular-app-webhook-deployer/webhook-deployer.conf >> /var/log/buddycloud-angular-app-webhook-deployer.log 2>&1
+  /usr/bin/webhook-deployer --configfile /opt/buddycloud-angular-app-webhook-deployer/webhook-deployer.conf >> /var/log/buddycloud/buddycloud-angular-app-webhook-deployer.log 2>&1
 end script
 
 post-start script

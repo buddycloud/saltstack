@@ -1,4 +1,4 @@
-/var/log/buddycloud-http-api.log {
+/var/log/buddycloud/buddycloud-http-api.log {
   copytruncate
   daily
   rotate 10
