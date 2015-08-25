@@ -12,8 +12,6 @@ buddycloud-media-server:
     - installed
     - sources:
       - buddycloud-media-server: http://downloads.buddycloud.com/packages/debian/nightly/buddycloud-media-server/buddycloud-media-server_latest.deb
-    - service:
-      - running
 
 /srv/buddycloud-media-server-filestore:
     file.directory:
@@ -59,9 +57,9 @@ create-buddycloud-media-server-schema:
     - group: root
     - mode: 644
 
-/etc/init.d/buddycloud-media-server:
+/etc/init/buddycloud-media-server.conf:
   file.managed:
-    - source: salt://buddycloud-media-server/buddycloud-media-server.init.d
+    - source: salt://buddycloud-media-server/upstart-script
     - user: root
     - group: root
     - mode: 755

@@ -15,7 +15,7 @@ https.key.password=password
 xmpp.component.host=127.0.0.1
 xmpp.component.port=5347
 xmpp.component.subdomain=media.{{ salt['pillar.get']('buddycloud:lookup:domain') }}
-xmpp.component.secretkey={{ salt['pillar.get']('buddycloud:lookup:xmpp-componet-secret') }}
+xmpp.component.secretkey={{ salt['pillar.get']('buddycloud:lookup:xmpp-component-secret') }}
 
 xmpp.connection.username=mediaserver-test
 xmpp.connection.password={{ salt['pillar.get']('buddycloud:lookup:media-jid-password') }}
@@ -26,7 +26,7 @@ xmpp.connection.servicename={{ salt['pillar.get']('buddycloud:lookup:domain') }}
 xmpp.reply.timeout=30000
 
 # JDBC
-jdbc.db.url=jdbc:postgresql://{{ salt['pillar.get']('buddycloud:lookup:database-server') }}/buddycloud_media_server?user=buddycloud_media_server&password={{ salt['pillar.get']('postgres:users:buddycloud_media_server:password') }}
+jdbc.db.url=jdbc:postgresql://{{ salt['pillar.get']('buddycloud:lookup:database-server') }}/{{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver?user={{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver&password={{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:tigase:password') }}
 jdbc.driver.class=org.postgresql.Driver
 
 # Max threshold beyond which files are written directly to disk, in bytes

@@ -14,5 +14,5 @@ stop on runlevel [!2345]
 setuid nobody
 setgid nogroup
 
-chdir /opt/buddycloud-media-server
+chdir /usr/share/buddycloud-media-server
 exec java -cp .:*:lib/* com.buddycloud.mediaserver.Main
