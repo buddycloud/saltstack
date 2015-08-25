@@ -15,4 +15,4 @@ setuid nobody
 setgid nogroup
 
 chdir /usr/share/buddycloud-media-server
-exec java -cp .:*:lib/* com.buddycloud.mediaserver.Main
+exec /usr/bin/java -Dlogback.configurationFile=logback.xml -XX:-OmitStackTraceInFastThrow -Djava.awt.headless=true -cp .:buddycloud-media-server-jar-with-dependencies.jar com.buddycloud.mediaserver.Main

@@ -28,7 +28,7 @@ xmpp.connection.servicename={{ salt['pillar.get']('buddycloud:lookup:domain') }}
 xmpp.connection.saslenabled=true
 
 # TLS security mode used when making the connection (disabled|enabled|required).
-xmpp.connection.securitymode=required
+xmpp.connection.securitymode=disabled
 
 # How much time it will wait for a response to an XMPP request (in milliseconds)
 xmpp.reply.timeout=5000

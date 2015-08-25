@@ -18,7 +18,7 @@ modules_disabled = {
     "version";              -- Replies to server version requests
 }
 
-c2s_require_encryption = true
+c2s_require_encryption = false
 s2s_require_encryption = true
 s2s_secure_auth        = false
 admins                 = { "you@{{ salt['pillar.get']('buddycloud:lookup:domain') }}", "pusher.{{ salt['pillar.get']('buddycloud:lookup:domain') }}" }
@@ -57,7 +57,7 @@ ssl = {
 
 VirtualHost "{{ salt['pillar.get']('buddycloud:lookup:domain') }}"
   authentication               = "internal_hashed" 
-  allow_unencrypted_plain_auth = false
+  allow_unencrypted_plain_auth = true
   allow_registration           = true
   anonymous                    = false
 

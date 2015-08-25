@@ -15,10 +15,10 @@ buddycloud-media-server:
 
 /srv/buddycloud-media-server-filestore:
     file.directory:
-    - user: root
-    - group: root
-    - dir_mode: 755
-    - file_mode: 644
+    - user: nobody
+    - group: nogroup
+    - dir_mode: 700
+    - file_mode: 600
     - recurse:
         - user
         - group
@@ -45,9 +45,13 @@ create-buddycloud-media-server-schema:
     - env:
       - PGPASSWORD: '{{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:mediaserver:password') }}'
 
+# create the jid for testing permissions
+create-media-xmpp-user-account:
+    cmd.run:
+          - name: echo -e "{{ salt['pillar.get']('buddycloud:lookup:media-jid-password') }}\n{{ salt['pillar.get']('buddycloud:lookup:media-jid-password') }}" | prosodyctl adduser mediaserver-test@{{ salt['pillar.get']('buddycloud:lookup:domain') }} | true
+
 /var/log/buddycloud-media-server:
   file.absent
-
 
 /etc/nginx/sites-enabled/buddycloud-media-server.vhost.conf:
   file.managed:
