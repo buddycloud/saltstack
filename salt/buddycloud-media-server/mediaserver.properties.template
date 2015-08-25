@@ -2,6 +2,7 @@
 cache.max.age=86400
 
 # HTTPS
+http.endpoint=https://media.{{ salt['pillar.get']('buddycloud:lookup:domain') }}:{{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }}/api/media_proxy
 http.port=60080
 http.test.port=9090
 https.port=60443
@@ -23,10 +24,17 @@ xmpp.connection.host=127.0.0.1
 xmpp.connection.port=5222
 xmpp.connection.servicename={{ salt['pillar.get']('buddycloud:lookup:domain') }}
 
-xmpp.reply.timeout=30000
+# Whether the client will use SASL authentication when logging into the server (true|false).
+xmpp.connection.saslenabled=true
+
+# TLS security mode used when making the connection (disabled|enabled|required).
+xmpp.connection.securitymode=required
+
+# How much time it will wait for a response to an XMPP request (in milliseconds)
+xmpp.reply.timeout=5000
 
 # JDBC
-jdbc.db.url=jdbc:postgresql://{{ salt['pillar.get']('buddycloud:lookup:database-server') }}/{{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver?user={{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver&password={{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:tigase:password') }}
+jdbc.db.url=jdbc:postgresql://{{ salt['pillar.get']('buddycloud:lookup:database-server') }}/{{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver?user={{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver&password={{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:mediaserver:password') }}
 jdbc.driver.class=org.postgresql.Driver
 
 # Max threshold beyond which files are written directly to disk, in bytes
@@ -37,5 +45,4 @@ media.todisk.threshold=1048576
 media.storage.root=/srv/buddycloud-media-server-filestore
 media.sizelimit=1000240000
 
-http.endpoint=https://media.{{ salt['pillar.get']('buddycloud:lookup:domain') }}:{{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }}/api/media_proxy
 
