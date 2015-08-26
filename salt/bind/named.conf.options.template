@@ -19,7 +19,7 @@ options {
   };
 };
 
-key "{{ salt['pillar.get']('buddycloud:lookup:tsigkeyname') }}" {
+key "{{ salt['pillar.get']('buddycloud:lookup:domain') }}" {
         algorithm hmac-md5;
         secret "{{ salt['pillar.get']('buddycloud:lookup:tsigkeysecret') }}";
 };
