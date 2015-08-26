@@ -45,6 +45,7 @@ bind-server:
 # now use the local nameserver
 eth0:
   network.managed:
+    - enabled: True
     - dns: 127.0.0.1
 
 bind-firewall-53-udp:
