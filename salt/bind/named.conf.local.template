@@ -1,5 +1,6 @@
 zone "{{ salt['pillar.get']('buddycloud:lookup:domain') }}" {
   type master;
   file "/etc/bind/db.buddycloud";
+  allow-update { key {{ salt['pillar.get']('buddycloud:lookup:domain') }}; };
 };
 
