@@ -43,8 +43,8 @@ bind-server:
       - file: /etc/bind/named.conf.options
 
 # now use the local nameserver
-system:
-  network.system:
+eth0:
+  network.managed:
     - dns: 127.0.0.1
 
 bind-firewall-53-udp:
