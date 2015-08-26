@@ -46,7 +46,9 @@ bind-server:
 eth0:
   network.managed:
     - enabled: True
+    - type: eth
     - dns: 127.0.0.1
+
 
 bind-firewall-53-udp:
   iptables.append:
