@@ -1,6 +1,3 @@
-pkg.removed:
- - apparmor
-
 /etc/bind/named.conf.options:
   file.managed:
     - source: salt://bind/named.conf.options.template
@@ -21,7 +18,7 @@ pkg.removed:
     - require:
       - pkg: bind9
 
-/etc/bind/db.buddycloud:
+/var/lib/bind/db.buddycloud:
   file.managed:
     - source: salt://bind/db.buddycloud.template
     - user: bind
@@ -41,7 +38,7 @@ bind-server:
     - require:
       - pkg: bind9
     - watch:
-      - file: /etc/bind/db.buddycloud
+      - file: /var/lib/bind/db.buddycloud
       - file: /etc/bind/named.conf.local
       - file: /etc/bind/named.conf.options
 
