@@ -1,3 +1,6 @@
+pkg.removed:
+ - apparmor
+
 /etc/bind/named.conf.options:
   file.managed:
     - source: salt://bind/named.conf.options.template
