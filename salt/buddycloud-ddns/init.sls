@@ -22,10 +22,10 @@ dns-A-record-{{A_record}}:
     - name: {{A_record}}
     - zone: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
     - ttl: 300
-    - data: 5.9.67.253
-    - nameserver: 5.9.91.110
+    - data: {{ salt['pillar.get']('buddycloud:lookup:server-ip') }}
+    - nameserver: {{ salt['pillar.get']('buddycloud:lookup:ddns-server') }}
     - keyfile: {{keyfile}}
-    - keyname: buddycloud.net
+    - keyname: {{ salt['pillar.get']('buddycloud:lookup:tsigkeyname') }}
 {% endfor %}
 
 dns-TXT-record-API:
@@ -35,9 +35,9 @@ dns-TXT-record-API:
     - zone: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
     - ttl: 300
     - data: '"v=1.0 host=demo.{{ salt['pillar.get']('buddycloud:lookup:domain') }} protocol=https path=/api port={{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }}"'
-    - nameserver: 5.9.91.110
+    - nameserver: {{ salt['pillar.get']('buddycloud:lookup:ddns-server') }}
     - keyfile: {{keyfile}}
-    - keyname: buddycloud.net
+    - keyname: {{ salt['pillar.get']('buddycloud:lookup:tsigkeyname') }}
 
 dns-TXT-record-channel-server:
   ddns.present:
@@ -46,9 +46,9 @@ dns-TXT-record-channel-server:
     - zone: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
     - ttl: 300
     - data: '"v=1.0 server=channels.{{ salt['pillar.get']('buddycloud:lookup:domain') }}"'
-    - nameserver: 5.9.91.110
+    - nameserver: {{ salt['pillar.get']('buddycloud:lookup:ddns-server') }}
     - keyfile: {{keyfile}}
-    - keyname: buddycloud.net
+    - keyname: {{ salt['pillar.get']('buddycloud:lookup:tsigkeyname') }}
 
 dns-SRV-record-c2s:
   ddns.present:
@@ -57,9 +57,9 @@ dns-SRV-record-c2s:
     - zone: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
     - ttl: 300
     - data: 5 0 5222 c2s.{{ salt['pillar.get']('buddycloud:lookup:domain') }}.
-    - nameserver: 5.9.91.110
+    - nameserver: {{ salt['pillar.get']('buddycloud:lookup:ddns-server') }}
     - keyfile: {{keyfile}}
-    - keyname: buddycloud.net
+    - keyname: {{ salt['pillar.get']('buddycloud:lookup:tsigkeyname') }}
 
 dns-SRV-record-s2s:
   ddns.present:
@@ -68,6 +68,6 @@ dns-SRV-record-s2s:
     - zone: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
     - ttl: 300
     - data: 5 0 5269 s2s.{{ salt['pillar.get']('buddycloud:lookup:domain') }}.
-    - nameserver: 5.9.91.110
+    - nameserver: {{ salt['pillar.get']('buddycloud:lookup:ddns-server') }}
     - keyfile: {{keyfile}}
-    - keyname: buddycloud.net
+    - keyname: {{ salt['pillar.get']('buddycloud:lookup:tsigkeyname') }}
