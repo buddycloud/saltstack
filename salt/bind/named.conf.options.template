@@ -18,3 +18,8 @@ options {
     2001:4860:4860::8888;
   };
 };
+
+key "{{ salt['pillar.get']('buddycloud:lookup:tsigkeyname') }}" {
+        algorithm hmac-md5;
+        secret "{{ salt['pillar.get']('buddycloud:lookup:tsigkeysecret') }}";
+};
