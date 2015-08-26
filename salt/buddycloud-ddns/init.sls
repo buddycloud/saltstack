@@ -25,7 +25,7 @@ dns-A-record-{{A_record}}:
     - data: {{ salt['pillar.get']('buddycloud:lookup:server-ip') }}
     - nameserver: {{ salt['pillar.get']('buddycloud:lookup:ddns-server') }}
     - keyfile: {{keyfile}}
-    - keyname: {{ salt['pillar.get']('buddycloud:lookup:tsigkeyname') }}
+    - keyname: {{ salt['pillar.get']('buddycloud:lookup:domain') }}.
 {% endfor %}
 
 dns-TXT-record-API:
@@ -37,7 +37,7 @@ dns-TXT-record-API:
     - data: '"v=1.0 host=demo.{{ salt['pillar.get']('buddycloud:lookup:domain') }} protocol=https path=/api port={{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }}"'
     - nameserver: {{ salt['pillar.get']('buddycloud:lookup:ddns-server') }}
     - keyfile: {{keyfile}}
-    - keyname: {{ salt['pillar.get']('buddycloud:lookup:tsigkeyname') }}
+    - keyname: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
 
 dns-TXT-record-channel-server:
   ddns.present:
@@ -48,7 +48,7 @@ dns-TXT-record-channel-server:
     - data: '"v=1.0 server=channels.{{ salt['pillar.get']('buddycloud:lookup:domain') }}"'
     - nameserver: {{ salt['pillar.get']('buddycloud:lookup:ddns-server') }}
     - keyfile: {{keyfile}}
-    - keyname: {{ salt['pillar.get']('buddycloud:lookup:tsigkeyname') }}
+    - keyname: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
 
 dns-SRV-record-c2s:
   ddns.present:
@@ -59,7 +59,7 @@ dns-SRV-record-c2s:
     - data: 5 0 5222 c2s.{{ salt['pillar.get']('buddycloud:lookup:domain') }}.
     - nameserver: {{ salt['pillar.get']('buddycloud:lookup:ddns-server') }}
     - keyfile: {{keyfile}}
-    - keyname: {{ salt['pillar.get']('buddycloud:lookup:tsigkeyname') }}
+    - keyname: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
 
 dns-SRV-record-s2s:
   ddns.present:
@@ -70,4 +70,4 @@ dns-SRV-record-s2s:
     - data: 5 0 5269 s2s.{{ salt['pillar.get']('buddycloud:lookup:domain') }}.
     - nameserver: {{ salt['pillar.get']('buddycloud:lookup:ddns-server') }}
     - keyfile: {{keyfile}}
-    - keyname: {{ salt['pillar.get']('buddycloud:lookup:tsigkeyname') }}
+    - keyname: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
