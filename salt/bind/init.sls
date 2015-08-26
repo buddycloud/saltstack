@@ -42,13 +42,13 @@ bind-server:
       - file: /etc/bind/named.conf.local
       - file: /etc/bind/named.conf.options
 
-# now use the local nameserver
-eth0:
-  network.managed:
-    - enabled: True
-    - type: eth
-    - dns: 127.0.0.1
-
+/etc/resolv.conf:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: '0644'
+    - source: salt://bind/resolv.conf.jinja
+    - template: jinja
 
 bind-firewall-53-udp:
   iptables.append:
