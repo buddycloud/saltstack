@@ -1,6 +1,6 @@
 certificates-group:
   group.present:
-    -name: certificates 
+    - name: certificates 
     - system: True
 
 buddycloud-group:
@@ -11,5 +11,7 @@ buddycloud-group:
 buddycloud-user:
   user.present:
     - name: buddycloud
+    - gid: buddycloud
     - groups:
       - buddycloud
+      - certificates
