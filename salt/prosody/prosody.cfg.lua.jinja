@@ -19,7 +19,7 @@ modules_disabled = {
 }
 
 c2s_require_encryption = false
-s2s_require_encryption = true
+{% if salt['pillar.get']('buddycloud:lookup:use_tls', False) -%}s2s_require_encryption = true{% endif -%};
 s2s_secure_auth        = false
 admins                 = { "you@{{ salt['pillar.get']('buddycloud:lookup:domain') }}", "pusher.{{ salt['pillar.get']('buddycloud:lookup:domain') }}" }
 daemonize              = true
@@ -42,6 +42,7 @@ log = {
         { levels = { min = "info"  }, to = "file", filename = "/var/log/buddycloud/prosody.info.log"  };
     }
 
+{% if salt['pillar.get']('buddycloud:lookup:use_tls', False) -%}
 ssl = {         
      key         = "/etc/certificates/{{ salt['pillar.get']('buddycloud:lookup:domain') }}.complete.pem";
      certificate = "/etc/certificates/{{ salt['pillar.get']('buddycloud:lookup:domain') }}.complete.pem";
@@ -54,6 +55,7 @@ ssl = {
                     "single_ecdh_use", 
                     "no_ticket"};
     }
+{% endif -%};
 
 VirtualHost "{{ salt['pillar.get']('buddycloud:lookup:domain') }}"
   authentication               = "internal_hashed" 

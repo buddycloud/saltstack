@@ -15,3 +15,12 @@ buddycloud-user:
     - groups:
       - buddycloud
       - certificates
+
+/var/log/buddycloud:
+  file.directory:
+    - user: buddycloud
+    - group: buddycloud
+    - mode: 755
+    - recurse:
+      - user
+      - group
