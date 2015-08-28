@@ -11,6 +11,7 @@ server {
   root                      /opt/buddycloud-angular-app;
   index                     index.html;
 
+  {% if salt['pillar.get']('buddycloud:lookup:use_tls', False) -%}
   ssl_certificate           /etc/certificates/{{ salt['pillar.get']('buddycloud:lookup:domain') }}.complete.pem;
   ssl_certificate_key       /etc/certificates/{{ salt['pillar.get']('buddycloud:lookup:domain') }}.complete.pem;
   ssl_dhparam               /etc/certificates/dh4096.pem;
@@ -27,6 +28,7 @@ server {
   # fetch OCSP records from URL in ssl_certificate and cache them
   ssl_stapling              on;
   ssl_stapling_verify       on;
+  {{% endif -%}}
 
   # forward requests to the API server
   location /api/ {
