@@ -93,6 +93,6 @@ webhook-firewall:
     - jump: ACCEPT
     - match: state
     - connstate: NEW
-    - dport: 8080
+    - dport: 8081
     - proto: tcp
     - save: True
