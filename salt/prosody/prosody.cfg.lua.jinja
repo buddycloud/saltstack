@@ -55,7 +55,7 @@ ssl = {
                     "single_ecdh_use", 
                     "no_ticket"};
     }
-{% endif -%};
+{% endif -%}
 
 VirtualHost "{{ salt['pillar.get']('buddycloud:lookup:domain') }}"
   authentication               = "internal_hashed" 
