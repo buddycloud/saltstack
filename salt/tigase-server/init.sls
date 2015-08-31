@@ -1,3 +1,5 @@
+{% set pgpassword = 'postgres:users:' + salt['pillar.get']('buddycloud:lookup:env') + '_tigase:password' %}
+
 install-tigase-server:
   archive.extracted:
     - name: /opt/tigase-server
@@ -49,8 +51,7 @@ create-tigase-db-schema:
     - name: psql -h  {{ salt['pillar.get']('buddycloud:lookup:database-server') }} -U {{ salt['pillar.get']('buddycloud:lookup:env') }}_tigase {{ salt['pillar.get']('buddycloud:lookup:env') }}_tigase -f database/postgresql-schema-5-1.sql
     - cwd: /opt/tigase-server
     - env:
-      - PGPASSWORD: '{{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:tigase:password') }}'
-
+      - PGPASSWORD: 'PGPASSWORD: {{ salt['pillar.get'](pgpassword) }}'
 
 tigase-firewall-c2s:
   iptables.append:

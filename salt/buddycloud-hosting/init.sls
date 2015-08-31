@@ -1,3 +1,5 @@
+{% set pgpassword = 'postgres:users:' + salt['pillar.get']('buddycloud:lookup:env') + '_hosting:password' %}
+
 buddycloud-hosting-dependencies:
   pkg.installed:
     - name: libssl1.0.0
@@ -18,7 +20,7 @@ create-hosting-account:
   cmd.run:
     - name: psql -h {{ salt['pillar.get']('buddycloud:lookup:database-server') }} -U {{ salt['pillar.get']('buddycloud:lookup:env') }}_tigase {{ salt['pillar.get']('buddycloud:lookup:env') }}_tigase -c "SELECT TigAddUserPlainPw('{{ salt['pillar.get']('buddycloud:lookup:hosting-admin-username') }}@{{ salt['pillar.get']('buddycloud:lookup:domain') }}', '{{ salt['pillar.get']('buddycloud:lookup:hosting-admin-password') }}');"
     - env:
-      - PGPASSWORD: '{{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:tigase:password') }}'
+      - PGPASSWORD: 'PGPASSWORD: {{ salt['pillar.get'](pgpassword) }}'
 
 # need to do this a nicer way
 #buddycloud-hosting:

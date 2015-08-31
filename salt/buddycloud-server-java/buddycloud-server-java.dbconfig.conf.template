@@ -1,3 +1,4 @@
+{% set pgpassword = 'postgres:users:' + salt['pillar.get']('buddycloud:lookup:env') + '_buddycloudserver:password' %}
 # dbc_install: configure database with dbconfig-common?
 #              set to anything but "true" to opt out of assistance
 dbc_install='true'
@@ -24,7 +25,7 @@ dbc_dbuser='buddycloud_server_java'
 # dbc_dbpass: database user password
 #	the password to use with the above username when connecting
 #	to a database, if one is required
-dbc_dbpass='{{ salt['pillar.get']('postgres:users:buddycloud_server_java:password') }}'
+dbc_dbpass='{{ salt['pillar.get'](pgpassword) }}'
 
 # dbc_dbserver: database host.  
 #	leave unset to use localhost (or a more efficient local method

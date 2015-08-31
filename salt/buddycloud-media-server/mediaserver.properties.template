@@ -1,3 +1,4 @@
+{% set pgpassword = 'postgres:users:' + salt['pillar.get']('buddycloud:lookup:env') + '_mediaserver:password' %}
 # CACHE
 cache.max.age=86400
 
@@ -34,7 +35,7 @@ xmpp.connection.securitymode=disabled
 xmpp.reply.timeout=5000
 
 # JDBC
-jdbc.db.url=jdbc:postgresql://{{ salt['pillar.get']('buddycloud:lookup:database-server') }}/{{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver?user={{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver&password={{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:mediaserver:password') }}
+jdbc.db.url=jdbc:postgresql://{{ salt['pillar.get']('buddycloud:lookup:database-server') }}/{{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver?user={{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver&password={{ salt['pillar.get'](pgpassword) }}
 jdbc.driver.class=org.postgresql.Driver
 
 # Max threshold beyond which files are written directly to disk, in bytes

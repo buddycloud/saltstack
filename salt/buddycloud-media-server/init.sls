@@ -1,3 +1,5 @@
+{% set pgpassword = 'postgres:users:' + salt['pillar.get']('buddycloud:lookup:env') + '_mediaserver:password' %}
+
 media-server-dependencies:
   pkg.installed:
     - pkgs:
@@ -43,7 +45,7 @@ create-buddycloud-media-server-schema:
   cmd.run:
     - name: psql -h {{ salt['pillar.get']('buddycloud:lookup:database-server') }} -U {{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver {{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver -f /usr/share/dbconfig-common/data/buddycloud-media-server/install/pgsql
     - env:
-      - PGPASSWORD: '{{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:mediaserver:password') }}'
+      - PGPASSWORD: '{{ salt['pillar.get'](pgpassword) }}'
 
 # create the jid for testing permissions
 create-media-xmpp-user-account:

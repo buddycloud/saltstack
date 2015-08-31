@@ -1,3 +1,4 @@
+{% set pgpassword = 'postgres:users:' + salt['pillar.get']('buddycloud:lookup:env') + '_prosody:password' %}
 modules_enabled = {
     "saslauth";             -- Authentication for clients and servers. Recommended if you want to log in.
     "tls";                  -- Add support for secure TLS on c2s/s2s connections
@@ -33,7 +34,7 @@ sql = {
         host     = "{{ salt['pillar.get']('buddycloud:lookup:database-server') }}";
         database = "{{ salt['pillar.get']('buddycloud:lookup:env') }}_prosody"; 
         username = "{{ salt['pillar.get']('buddycloud:lookup:env') }}_prosody";
-        password = "{{ salt['pillar.get']('buddycloud:lookup:env') }}_{{ salt['pillar.get']('postgres:users:prosody:password') }}";
+        password = "{{ salt['pillar.get'](pgpassword) }}";
     }
 
 log = {
