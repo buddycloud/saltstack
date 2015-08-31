@@ -1,3 +1,5 @@
+{% set pgpassword = 'postgres:users:' + salt['pillar.get']('buddycloud:lookup:env') + '_buddycloudserver:password' %}
+
 buddycloud-server-java-dependencies:
   pkg.installed:
     - pkgs:
@@ -17,7 +19,7 @@ create-buddycloud-server-schema:
   cmd.run:
     - name: psql -h {{ salt['pillar.get']('buddycloud:lookup:database-server') }} -U {{ salt['pillar.get']('buddycloud:lookup:env') }}_buddycloudserver {{ salt['pillar.get']('buddycloud:lookup:env') }}_buddycloudserver -f /usr/share/dbconfig-common/data/buddycloud-server-java/install/pgsql
     - env:
-      - PGPASSWORD: '{{ salt['pillar.get']('postgres:users:buddycloudserver:password') }}'
+      - PGPASSWORD: {{ salt['pillar.get'](pgpassword) }}
 
 /etc/dbconfig-common/buddycloud-server-java.conf:
   file.managed:
