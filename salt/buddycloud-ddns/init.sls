@@ -71,3 +71,14 @@ dns-SRV-record-s2s:
     - nameserver: {{ salt['pillar.get']('buddycloud:lookup:ddns-server') }}
     - keyfile: {{keyfile}}
     - keyname: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
+
+dns-SRV-record-s2s-topics:
+  ddns.present:
+    - rdtype: SRV
+    - name: _xmpp-server._tcp.topics
+    - zone: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
+    - ttl: 300
+    - data: 5 0 5269 s2s.{{ salt['pillar.get']('buddycloud:lookup:domain') }}.
+    - nameserver: {{ salt['pillar.get']('buddycloud:lookup:ddns-server') }}
+    - keyfile: {{keyfile}}
+    - keyname: {{ salt['pillar.get']('buddycloud:lookup:domain') }}
