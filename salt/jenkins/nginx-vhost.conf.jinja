@@ -6,7 +6,7 @@ server {
 }
 
 server {
-  listen                    {{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }} ssl;
+  listen                    443 ssl;
   server_name               build.buddycloud.com;
 
   ssl_certificate           /etc/certificates/buddycloud.com.complete.pem;

@@ -1,3 +1,4 @@
+{% set pgpassword = 'postgres:users:' + salt['pillar.get']('buddycloud:lookup:env') + '_pusher:password' %}
 # XMPP properties
 xmpp.host=127.0.0.1
 xmpp.port=5347
@@ -5,7 +6,7 @@ xmpp.subdomain=pusher.{{ salt['pillar.get']('buddycloud:lookup:domain') }}
 xmpp.secretkey={ salt['pillar.get']('buddycloud:lookup:pusher-xmpp-componet-password') }}
 
 # JDBC
-jdbc.url=jdbc:postgresql://{{ salt['pillar.get']('buddycloud:lookup:database-server') }}:5432/buddycloud_pusher?user=buddycloud_pusher&password={{ salt['pillar.get']('postgres:users:buddycloud_pusher:password') }}
+jdbc.url=jdbc:postgresql://{{ salt['pillar.get']('buddycloud:lookup:database-server') }}:5432/buddycloud_pusher?user=buddycloud_pusher&password={{ salt['pillar.get'](pgpassword) }}
 
 # channel server jid
 channel.server=channels.{{ salt['pillar.get']('buddycloud:lookup:domain') }}
@@ -27,5 +28,5 @@ mail.template.ADMIN_NAME=buddycloud
 mail.template.WEB_CLIENT_URL=https://buddycloud.{{ salt['pillar.get']('buddycloud:lookup:domain') }}
 
 # GCM
-gcm.google_project_id=
-gcm.api_key=
+gcm.google_project_id={{ salt['pillar.get']('buddycloud:lookup:gcm.google_project_id') }}
+gcm.api_key={{ salt['pillar.get']('buddycloud:lookup:gcm.api_key') }}
