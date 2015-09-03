@@ -1,0 +1,23 @@
+buddycloud:
+  lookup:
+    domain: example.org
+    env: dev
+    git-branch: master
+    send-address: noreply@example.org
+    smtp-server: smtp.example.com
+    web-listen-port: 443
+    use_tls: True
+    database-server: db01.example.com
+    # DNS
+    server-ip: 1.2.3.4
+    ddns-server: 1.2.3.4
+    tsigkeysecret: abcdefghijklmnopqrstuv==
+    dns-checker-recipient: you@example.com
+    # XMPP
+    xmpp-component-secret: secret
+    media-jid-password: mediaserver-test
+    hosting-admin-username: hosting-admin-username   #appended to domain
+    hosting-admin-password: hosting-admin-password
+    # Pusher
+    gcm.google_project_id: 123456789012
+    gcm.api_key: abcdefghijklmnopqrstuvwxyzabcdefghijklm
