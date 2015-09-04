@@ -50,7 +50,9 @@ prosody-read-certificates:
 prosody:
   pkg.installed: []
   service.running:
-    - full_restart: True
+    - enable: True
+    - reload: True
+    - sig: "/usr/bin/lua5.1 /usr/bin/prosody"
     - watch:
       - file: /etc/prosody/prosody.cfg.lua
     - require:

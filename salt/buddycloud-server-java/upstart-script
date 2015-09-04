@@ -1,9 +1,12 @@
-description "Buddycloud server (java)"
+description "Buddycloud Server (java)"
 
-setuid root
-setgid root
+setuid nobody
+setgid nogroup
 
+# respawn infintely, waiting 10s between retries.
 respawn
+respawn limit 0 10
+
 start on started network-services
 stop on stopping network-services
 
