@@ -3,14 +3,15 @@ description "Buddycloud Server (java)"
 setuid nobody
 setgid nogroup
 
-# respawn infintely, waiting 10s between retries.
-respawn
-respawn limit 0 10
-
 start on started network-services
 stop on stopping network-services
 
+# respawn infintely.
+respawn limit unlimited
+# don't restart immediatelly
+post-stop exec sleep 10
+
 script
-cd /usr/share/buddycloud-server-java
-exec /usr/bin/java -jar channelserver-jar-with-dependencies.jar
+  cd /usr/share/buddycloud-server-java
+  exec /usr/bin/java -jar channelserver-jar-with-dependencies.jar
 end script

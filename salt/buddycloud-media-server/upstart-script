@@ -1,18 +1,17 @@
-# Buddycloud Media Server
-
 description     "Buddycloud Media Server"
-
-# respawn the job up to 10 times within a 5 second period.
-# If the job exceeds these values, it will be stopped and
-# marked as failed.
-respawn
-respawn limit 10 5
-
-start on runlevel [2345]
-stop on runlevel [!2345]
 
 setuid nobody
 setgid nogroup
 
-chdir /usr/share/buddycloud-media-server
-exec /usr/bin/java -Dlogback.configurationFile=logback.xml -XX:-OmitStackTraceInFastThrow -Djava.awt.headless=true -cp .:buddycloud-media-server-jar-with-dependencies.jar com.buddycloud.mediaserver.Main
+start on started network-services
+stop on stopping network-services
+
+# respawn infintely.
+respawn limit unlimited
+# don't restart immediatelly
+post-stop exec sleep 10
+
+script
+  chdir /usr/share/buddycloud-media-server
+  exec /usr/bin/java -Dlogback.configurationFile=logback.xml -XX:-OmitStackTraceInFastThrow -Djava.awt.headless=true -cp .:buddycloud-media-server-jar-with-dependencies.jar com.buddycloud.mediaserver.Main
+end script
