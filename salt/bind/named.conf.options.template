@@ -6,13 +6,13 @@ options {
   listen-on { any; };
   forwarders {
     // statically configured nameserver
-    {% for nameserver in salt['pillar.get']('nameservers', []) %}
-    {{ nameserver }};
-    {% endfor %}
+    //{% for nameserver in salt['pillar.get']('nameservers', []) %}
+    //{{ nameserver }};
+    //{% endfor %}
     // nameservers based on the system configuration (NetworkManager)
-    {% for nameserver in salt['grains.get']('nameservers') %}
-    {{ nameserver }};
-    {% endfor %}
+    //{% for nameserver in salt['grains.get']('nameservers') %}
+    //{{ nameserver }};
+    //{% endfor %}
     // fallback nameservers (google)
     8.8.8.8;
     2001:4860:4860::8888;
