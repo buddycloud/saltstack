@@ -77,8 +77,6 @@ postgres-user-{{ name }}:
     - name: {{ name }}
     - createdb: {{ salt['pillar.get']('postgres:users:' + name + ':createdb', False) }}
     - password: {{ salt['pillar.get']('postgres:users:' + name + ':password', 'changethis') }}
-    - connlimit: {{ salt['pillar.get']('postgres:users:' + name + ':connlimit', '10') }}
-    - runas: postgres
     - require:
       - service: {{ postgres.service }}
 {% endfor%}
@@ -96,7 +94,6 @@ postgres-db-{{ name }}:
     {% if salt['pillar.get']('postgres:databases:'+ name +':owner') %}
     - owner: {{ salt['pillar.get']('postgres:databases:'+ name +':owner') }}
     {% endif %}
-    - runas: {{ salt['pillar.get']('postgres:databases:'+ name +':runas', 'postgres') }}
     {% if salt['pillar.get']('postgres:databases:'+ name +':user') %}
     - require:
         - postgres_user: postgres-user-{{ salt['pillar.get']('postgres:databases:'+ name +':user') }}
