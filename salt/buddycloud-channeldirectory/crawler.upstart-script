@@ -1,7 +1,7 @@
 description     "Buddycloud Channel Directory"
 
-setuid nobody
-setgid nogroup
+setuid buddycloud
+setgid buddycloud
 
 start on started network-services
 stop on stopping network-services

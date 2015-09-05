@@ -17,8 +17,8 @@ buddycloud-media-server:
 
 /srv/buddycloud-media-server-filestore:
     file.directory:
-    - user: nobody
-    - group: nogroup
+    - user: buddycloud
+    - group: buddycloud
     - dir_mode: 700
     - file_mode: 600
     - recurse:

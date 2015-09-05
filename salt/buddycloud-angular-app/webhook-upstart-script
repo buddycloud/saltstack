@@ -1,14 +1,15 @@
 description "buddycloud-angular-app-webhook-deployer"
 
-setuid nobody
-setgid nogroup
-
-# respawn infintely, waiting 10s between retries.
-respawn
-respawn limit 0 10
+setuid buddycloud
+setgid buddycloud
 
 start on started network-services
 stop on stopping network-services
+
+# respawn infintely.
+respawn limit unlimited
+# don't restart immediatelly
+post-stop exec sleep 10
 
 script
   /usr/bin/webhook-deployer --configfile /opt/buddycloud-angular-app-webhook-deployer/webhook-deployer.conf >> /var/log/buddycloud/buddycloud-angular-app-webhook-deployer.log 2>&1

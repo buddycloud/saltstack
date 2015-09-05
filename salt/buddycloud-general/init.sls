@@ -1,20 +1,25 @@
-certificates-group:
-  group.present:
-    - name: certificates 
-    - system: True
-
-buddycloud-group:
+# so that a few other services can write to /var/log/buddycloud
+group-buddycloud:
   group.present:
     - name: buddycloud
     - system: True
+    - members:
+      - nobody
 
-buddycloud-user:
+user-buddycloud:
   user.present:
     - name: buddycloud
     - gid: buddycloud
-    - groups:
+    - system: True
+
+# which users can read the certificates in /etc/certificates
+group-certificates:
+  group.present:
+    - name: certificates 
+    - system: True
+    - members:
+      - nobody
       - buddycloud
-      - certificates
 
 /var/log/buddycloud:
   file.directory:

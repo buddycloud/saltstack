@@ -44,8 +44,9 @@ prosody-packages:
 prosody-read-certificates:
   user.present:
     - name: prosody
-    - groups:
+    - optional_groups:
       - certificates
+    - remove_groups: False
 
 prosody:
   pkg.installed: []

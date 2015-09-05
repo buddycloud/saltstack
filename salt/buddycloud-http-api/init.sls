@@ -21,8 +21,8 @@ buddycloud-http-api-git-checkout:
 
 /opt/buddycloud-http-api:
   file.directory:
-    - user: nobody
-    - group: nogroup
+    - user: buddycloud
+    - group: buddycloud
     - mode: 755
     - recurse:
       - user
@@ -30,15 +30,15 @@ buddycloud-http-api-git-checkout:
 
 /var/log/buddycloud/buddycloud-http-api.log:
   file.managed:
-    - user: nobody
-    - group: nogroup
+    - user: buddycloud
+    - group: buddycloud
     - mode: 644
 
 buddycloud-http-api-install:
   cmd.run:
     - name: npm i --development .
     - cwd: /opt/buddycloud-http-api
-    - runas: nobody
+    - runas: buddycloud
     - env: 
       - HOME: /opt/buddycloud-http-api
     - require:

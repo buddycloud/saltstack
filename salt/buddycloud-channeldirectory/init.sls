@@ -19,8 +19,8 @@ build-buddycloud-channeldirectory:
 
 /opt/buddycloud-channeldirectory:
   file.directory:
-    - user: nobody
-    - group: nogroup
+    - user: buddycloud
+    - group: buddycloud
     - mode: 755
     - recurse:
       - user
@@ -28,8 +28,8 @@ build-buddycloud-channeldirectory:
 
 /var/log/buddycloud/buddycloud-channeldirectory.log:
   file.managed:
-    - user: nobody
-    - group: nogroup
+    - user: buddycloud
+    - group: buddycloud
     - mode: 644
 
 /opt/buddycloud-channeldirectory/configuration.properties:

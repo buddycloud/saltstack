@@ -9,8 +9,8 @@ respawn limit 10 5
 start on runlevel [2345]
 stop on runlevel [!2345]
 
-setuid nobody
-setgid nogroup
+setuid buddycloud
+setgid buddycloud
 
 script
    cd /opt/buddycloud-channeldirectory

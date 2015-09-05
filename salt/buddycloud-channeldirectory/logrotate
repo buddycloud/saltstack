@@ -4,7 +4,7 @@
   rotate 10
   compress
   missingok
-  create 640 nobody nogroup
+  create 640 buddycloud buddycloud
 }
 
 /var/log/buddycloud/buddycloud-crawler.log {
@@ -13,7 +13,7 @@
   rotate 10
   compress
   missingok
-  create 640 nobody nogroup
+  create 640 buddycloud buddycloud
 }
 
 /var/log/buddycloud/buddycloud-solr.log {
@@ -22,5 +22,5 @@
   rotate 10
   compress
   missingok
-  create 640 nobody nogroup
+  create 640 buddycloud buddycloud
 }
