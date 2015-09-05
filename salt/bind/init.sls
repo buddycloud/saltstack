@@ -18,6 +18,9 @@
     - require:
       - pkg: bind9
 
+/var/lib/bind/db.buddycloud.jnl:
+  file.absent
+
 /var/lib/bind/db.buddycloud:
   file.managed:
     - source: salt://bind/db.buddycloud.template
