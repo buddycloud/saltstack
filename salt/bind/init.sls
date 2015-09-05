@@ -48,7 +48,8 @@ bind-server:
 
 re-dhcp:
   cmd.run:
-    -name: ifup -a --force
+    - name: ifup -a --force
+    - name: resolvconf -u
 
 bind-firewall-53-udp:
   iptables.append:
