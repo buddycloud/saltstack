@@ -1,7 +1,7 @@
 description "buddycloud-angular-app-webhook-deployer"
 
-setuid buddycloud
-setgid buddycloud
+setuid nobody
+setgid nogroup
 
 start on started network-services
 stop on stopping network-services

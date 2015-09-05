@@ -36,8 +36,8 @@ buddycloud-angular-app-git-checkout:
 
 /var/log/buddycloud/buddycloud-angular-app.log:
   file.managed:
-    - user: buddycloud
-    - group: buddycloud
+    - user: nobody
+    - group: nogroup
     - mode: 644
 
 /etc/nginx/sites-enabled/buddycloud-angular-app.vhost.conf:
@@ -70,8 +70,8 @@ webhook-deployer:
 
 /var/log/buddycloud/buddycloud-angular-app-webhook-deployer.log:
   file.managed:
-    - user: buddycloud
-    - group: buddycloud
+    - user: nobody
+    - group: nogroup
     - mode: 644
 
 /opt/buddycloud-angular-app-webhook-deployer/webhook-deployer.conf:
