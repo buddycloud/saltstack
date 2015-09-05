@@ -42,13 +42,13 @@ bind-server:
       - file: /etc/bind/named.conf.local
       - file: /etc/bind/named.conf.options
 
-/etc/resolv.conf:
-  file.managed:
-    - user: root
-    - group: root
-    - mode: '0644'
-    - source: salt://bind/resolv.conf.jinja
-    - template: jinja
+/etc/dhcp/dhclient.conf:
+  file.append:
+    - text: "supersede domain-name-servers 127.0.0.1;"
+
+re-dhcp:
+  cmd.run:
+    -name: ifup -a --force
 
 bind-firewall-53-udp:
   iptables.append:
