@@ -48,9 +48,6 @@ buddycloud-angular-app-git-checkout:
     - group: root
     - mode: 644
 
-npm:
-  pkg.installed
-
 webhook-deployer:
   npm.installed:
     - require:
