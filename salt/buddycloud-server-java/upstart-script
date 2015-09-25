@@ -12,6 +12,6 @@ respawn limit unlimited
 post-stop exec sleep 10
 
 script
-  cd /usr/share/buddycloud-server-java
+  cd /opt/buddycloud-server-java
   exec /usr/bin/java -jar channelserver-jar-with-dependencies.jar
 end script
