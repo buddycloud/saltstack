@@ -10,7 +10,7 @@ buddyclould-angular-app-dependencies:
       - libssl-dev
       - build-essential
       - g++
-      - npm
+      - nodejs
 
 buddycloud-angular-app-npm-packages:
   npm.installed:
