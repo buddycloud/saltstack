@@ -10,7 +10,7 @@ buddyclould-angular-app-dependencies:
       - libssl-dev
       - build-essential
       - g++
-      - npm
+      - nodejs
 
 buddycloud-angular-app-npm-packages:
   npm.installed:
@@ -36,8 +36,8 @@ buddycloud-angular-app-git-checkout:
 
 /var/log/buddycloud/buddycloud-angular-app.log:
   file.managed:
-    - user: nobody
-    - group: nogroup
+    - user: buddycloud
+    - group: buddycloud
     - mode: 644
 
 /etc/nginx/sites-enabled/buddycloud-angular-app.vhost.conf:
@@ -51,7 +51,7 @@ buddycloud-angular-app-git-checkout:
 webhook-deployer:
   npm.installed:
     - require:
-      - pkg: npm
+      - pkg: nodejs
 
 /etc/init/buddycloud-angular-app-webhook-deployer.conf:
   file.managed:
@@ -67,8 +67,8 @@ webhook-deployer:
 
 /var/log/buddycloud/buddycloud-angular-app-webhook-deployer.log:
   file.managed:
-    - user: nobody
-    - group: nogroup
+    - user: buddycloud
+    - group: buddycloud
     - mode: 644
 
 /opt/buddycloud-angular-app-webhook-deployer/webhook-deployer.conf:

@@ -10,11 +10,13 @@ media-server-dependencies:
       - openjdk-7-jre-headless
 
 buddycloud-media-server:
-  pkg:
-    - installed
-    - sources:
-      - buddycloud-media-server: http://downloads.buddycloud.com/packages/debian/nightly/buddycloud-media-server/buddycloud-media-server_latest.deb
-
+  archive.extracted:
+    - name: /opt/buddycloud-media-server
+    - source: https://dl.bintray.com/buddycloud/buddycloud-media-server/buddycloud-media-server.tgz
+    - source_hash: https://dl.bintray.com/buddycloud/buddycloud-media-server/file.hashes
+    - archive_format: tar
+    - tar_options: z
+    
 /srv/buddycloud-media-server-filestore:
     file.directory:
     - user: buddycloud
@@ -75,8 +77,8 @@ create-media-xmpp-user-account:
     - force_reload: True
     - full_restart: True
     - require:
-      - pkg: buddycloud-server-java
-      - pkg: buddycloud-media-server
+      - archive: buddycloud-server-java
+      - archive: buddycloud-media-server
       - pkg: media-server-dependencies
       - file: /usr/share/buddycloud-media-server/mediaserver.properties
       - file: /usr/share/buddycloud-media-server/logback.xml

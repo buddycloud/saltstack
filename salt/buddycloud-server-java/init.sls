@@ -12,8 +12,8 @@ buddycloud-server-java-dependencies:
 buddycloud-server-java:
   archive.extracted:
     - name: /opt/buddycloud-server-java
-    - source: https://dl.bintray.com/buddycloud/builds/budducloud-channel-server.tgz
-    - source_hash: https://dl.bintray.com/buddycloud/builds/file.hashes
+    - source: https://dl.bintray.com/buddycloud/buddycloud-server-java/buddycloud-server-java.tgz
+    - source_hash: https://dl.bintray.com/buddycloud/buddycloud-server-java/file.hashes
     - archive_format: tar
     - tar_options: z
     

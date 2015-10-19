@@ -13,5 +13,5 @@ post-stop exec sleep 10
 
 script
   cd /opt/buddycloud-server-java
-  exec /usr/bin/java -jar channelserver-jar-with-dependencies.jar
+  exec /usr/bin/java -jar target/channelserver-jar-with-dependencies.jar
 end script
