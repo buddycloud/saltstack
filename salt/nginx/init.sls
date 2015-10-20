@@ -90,14 +90,14 @@ nginx-firewall-80:
     - proto: tcp
     - save: True
 
-nginx-firewall-{{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }}:
+nginx-firewall-443:
   iptables.append:
     - table: filter
     - chain: INPUT
     - jump: ACCEPT
     - match: state
     - connstate: NEW
-    - dport: {{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }}
+    - dport: 443
     - proto: tcp
     - save: True
 

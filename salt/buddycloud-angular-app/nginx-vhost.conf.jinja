@@ -6,12 +6,13 @@ server {
 }
 
 server {
-  listen                    {{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }} {% if salt['pillar.get']('buddycloud:lookup:use_tls', False) %} ssl{% endif %};
+  listen                    {{ salt['pillar.get']('buddycloud:lookup:web-listen-port') }} {% if salt['pillar.get']('buddycloud:lookup:use_tls', False) -%} ssl{% endif -%};
   server_name               {{ salt['pillar.get']('buddycloud:lookup:domain') }};
   root                      /opt/buddycloud-angular-app;
   index                     index.html;
-
-  {% if salt['pillar.get']('buddycloud:lookup:use_tls', False) %}
+  error_log 		    /var/log/nginx/{{ salt['pillar.get']('buddycloud:lookup:domain') }}-error.log;
+  access_log 		    /var/log/nginx/{{ salt['pillar.get']('buddycloud:lookup:domain') }}-access.log;
+  {% if salt['pillar.get']('buddycloud:lookup:use_tls', False) -%}
   ssl_certificate           /etc/certificates/{{ salt['pillar.get']('buddycloud:lookup:domain') }}.complete.pem;
   ssl_certificate_key       /etc/certificates/{{ salt['pillar.get']('buddycloud:lookup:domain') }}.complete.pem;
   ssl_dhparam               /etc/certificates/dh4096.pem;
@@ -28,7 +29,7 @@ server {
   # fetch OCSP records from URL in ssl_certificate and cache them
   ssl_stapling              on;
   ssl_stapling_verify       on;
-  {% endif %}
+  {% endif -%}
 
   # forward requests to the API server
   location /api/ {
