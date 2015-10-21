@@ -28,7 +28,7 @@ buddycloud-media-server:
         - group
         - mode
 
-/usr/share/buddycloud-media-server/mediaserver.properties:
+/opt/buddycloud-media-server/mediaserver.properties:
   file.managed:
     - source: salt://buddycloud-media-server/mediaserver.properties.template
     - user: root
@@ -36,7 +36,7 @@ buddycloud-media-server:
     - mode: 644
     - template: jinja
 
-/usr/share/buddycloud-media-server/logback.xml:
+/opt/buddycloud-media-server/logback.xml:
   file.managed:
     - source: salt://buddycloud-media-server/logback.xml
     - user: root
@@ -45,7 +45,7 @@ buddycloud-media-server:
 
 create-buddycloud-media-server-schema:
   cmd.run:
-    - name: psql -h {{ salt['pillar.get']('buddycloud:lookup:database-server') }} -U {{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver {{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver -f /usr/share/dbconfig-common/data/buddycloud-media-server/install/pgsql
+    - name: cat /opt/buddycloud-media-server/postgres/*sql | psql -h {{ salt['pillar.get']('buddycloud:lookup:database-server') }} -U {{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver {{ salt['pillar.get']('buddycloud:lookup:env') }}_mediaserver
     - env:
       - PGPASSWORD: '{{ salt['pillar.get'](pgpassword) }}'
 
@@ -80,6 +80,6 @@ create-media-xmpp-user-account:
       - archive: buddycloud-server-java
       - archive: buddycloud-media-server
       - pkg: media-server-dependencies
-      - file: /usr/share/buddycloud-media-server/mediaserver.properties
-      - file: /usr/share/buddycloud-media-server/logback.xml
+      - file: /opt/buddycloud-media-server/mediaserver.properties
+      - file: /opt/buddycloud-media-server/logback.xml
       - cmd: create-buddycloud-media-server-schema
