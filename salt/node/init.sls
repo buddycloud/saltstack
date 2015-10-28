@@ -6,8 +6,8 @@ nodesource:
     - file: /etc/apt/sources.list.d/nodesource.list
     - keyid: '68576280'
     - keyserver: keys.gnupg.net
+    - refresh_db: true
 
 install-node012:
   pkg.latest:
     - name: nodejs
-    - name: npm
