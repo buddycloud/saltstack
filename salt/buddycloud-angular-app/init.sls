@@ -25,6 +25,14 @@ buddycloud-angular-app-git-checkout:
     - force_reset: true
     - force: true
 
+/opt/buddycloud-angular-app/settings.js:
+  file.managed:
+    - source: salt://buddycloud-angular-app/settings.js.jinja
+    - template: jinja
+    - user: buddycloud
+    - group: buddycloud
+    - mode: 755
+
 /opt/buddycloud-angular-app:
   file.directory:
     - user: buddycloud

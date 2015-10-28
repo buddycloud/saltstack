@@ -1,6 +1,8 @@
 install-buddyclould-http-api-dependencies:
   pkg.installed:
     - pkgs:
+      - nodejs
+      - npm
       - git
       - git-core
       - libicu-dev

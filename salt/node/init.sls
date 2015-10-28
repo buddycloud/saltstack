@@ -10,3 +10,4 @@ nodesource:
 install-node012:
   pkg.latest:
     - name: nodejs
+    - name: npm
